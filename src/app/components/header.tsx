@@ -1,10 +1,25 @@
 import Image from 'next/image';
+import React, { useEffect, useState } from 'react';
 
 interface HeaderProps {
   page: String;
 }
 
 const Header:React.FC<HeaderProps> = ({page}) => {
+  const [token, setToken] = useState<string | null>(null);
+  const [profileDropdown, setProfileDropdown] = useState<boolean>(false);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    setToken(storedToken);
+  }, []);
+
+  const flipDropdown = () => {
+    setProfileDropdown(prevState => !prevState);
+  };
+
+
+
   return (
     <div >
       <header>
@@ -27,7 +42,29 @@ const Header:React.FC<HeaderProps> = ({page}) => {
                           <button type="submit" className="text-white absolute end-2.5 bottom-2.5 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Search</button>
                       </div>
                   </form>
-                    <a href="/signin" className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Sign in</a>
+
+                    {token ? (
+                      <div className="flex"> 
+                        <a className="ml-4">
+                          <Image src="/profileicon.png" className="rounded-full h-16 w-16" width={50} height={50} alt="Profile Image" onClick={flipDropdown} onMouseEnter={flipDropdown} style={{ cursor: 'pointer' }}/>
+                        </a>
+                        {profileDropdown ? (
+                        <div className="absolute right-0 z-10 mt-14 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex={-1}>
+                          <div className="py-1" role="none">
+                            
+                            <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex={-1} id="menu-item-0">Account settings</a>
+                            <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex={-1} id="menu-item-1">Support</a>
+                            <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex={-1} id="menu-item-2">License</a>
+                            <form method="POST" action="#" role="none">
+                              <button type="submit" className="block w-full px-4 py-2 text-left text-sm text-gray-700" role="menuitem" tabIndex={-1} id="menu-item-3">Sign out</button>
+                            </form>
+                          </div>
+                        </div>
+                        ) : null}
+                      </div>
+                    ) : (
+                      <a href="/signin" className="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800">Sign in</a>
+                    )}
 
                     <button data-collapse-toggle="mobile-menu-2" type="button" className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
                         <span className="sr-only">Open main menu</span>
