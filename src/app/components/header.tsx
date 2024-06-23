@@ -25,7 +25,7 @@ const Header:React.FC<HeaderProps> = ({page}) => {
       <header>
         <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 ">
             <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-                <a href="" className="flex items-center">
+                <a href="/" className="flex items-center">
                     <Image src="/BiciLogo700.svg" className="mr-1 h-9 sm:h-9" width={50} height={50} alt="BiciBids Logo" />
                     <span className="self-center text-2xl mt-1 font-semibold whitespace-nowrap dark:text-white">BiciBids</span>
                 </a>
@@ -44,19 +44,19 @@ const Header:React.FC<HeaderProps> = ({page}) => {
                   </form>
 
                     {token ? (
-                      <div className="flex"> 
+                      <div className="flex relative"> 
                         <a className="ml-4">
-                          <Image src="/profileicon.png" className="rounded-full h-16 w-16" width={50} height={50} alt="Profile Image" onClick={flipDropdown} onMouseEnter={flipDropdown} style={{ cursor: 'pointer' }}/>
+                          <Image src="/profileicon.png" className="rounded-full h-16 w-16" width={50} height={50} alt="Profile Image" onClick={flipDropdown} style={{ cursor: 'pointer' }}/>
                         </a>
                         {profileDropdown ? (
-                        <div className="absolute right-0 z-10 mt-14 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex={-1}>
-                          <div className="py-1" role="none">
+                        <div className="absolute right--10 z-10 mt-14  origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex={-1}>
+                          <div className="py-2 w-32 text-sm text-gray-700 dark:text-gray-200" role="none">
                             
-                            <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex={-1} id="menu-item-0">Account settings</a>
-                            <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex={-1} id="menu-item-1">Support</a>
-                            <a href="#" className="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabIndex={-1} id="menu-item-2">License</a>
+                            <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem" tabIndex={-1} id="menu-item-0">Account</a>
+                            <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem" tabIndex={-1} id="menu-item-1">Settings</a>
+                            
                             <form method="POST" action="#" role="none">
-                              <button type="submit" className="block w-full px-4 py-2 text-left text-sm text-gray-700" role="menuitem" tabIndex={-1} id="menu-item-3">Sign out</button>
+                              <button type="submit" className="w-full block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem" tabIndex={-1} id="menu-item-3">Sign out</button>
                             </form>
                           </div>
                         </div>
@@ -76,16 +76,16 @@ const Header:React.FC<HeaderProps> = ({page}) => {
                 <div className="hidden mr-auto ml-16 items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
                     <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                         <li>
-                        <a href="/" className={`block py-2 pr-4 pl-3 rounded lg:p-0 ${page === 'Home' ? 'text-white bg-primary-700 lg:bg-transparent lg:text-primary-700 dark:text-white' : 'text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700'}`} aria-current={page === 'Home' ? 'page' : undefined}>Home</a>
+                          <a href="/" className={`block py-2 pr-4 pl-3 rounded lg:p-0 ${page === 'Home' ? 'text-white bg-primary-700 lg:bg-transparent lg:text-primary-700 dark:text-white' : 'text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700'}`} aria-current={page === 'Home' ? 'page' : undefined}>Home</a>
                         </li>
                         <li>
-                        <a href="/buy" className={`block py-2 pr-4 pl-3 rounded lg:p-0 ${page === 'Buy' ? 'text-white bg-primary-700 lg:bg-transparent lg:text-primary-700 dark:text-white' : 'text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700'}`}>Buy</a>
+                          <a href="/buy" className={`block py-2 pr-4 pl-3 rounded lg:p-0 ${page === 'Buy' ? 'text-white bg-primary-700 lg:bg-transparent lg:text-primary-700 dark:text-white' : 'text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700'}`}>Buy</a>
                         </li>
                         <li>
-                            <a href="/sell" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Sell</a>
+                          <a href="/sell" className={`block py-2 pr-4 pl-3 rounded lg:p-0 ${page === 'Sell' ? 'text-white bg-primary-700 lg:bg-transparent lg:text-primary-700 dark:text-white' : 'text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700'}`}>Sell</a>
                         </li>
                         <li>
-                            <a href="/about" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">About</a>
+                          <a href="/about" className={`block py-2 pr-4 pl-3 rounded lg:p-0 ${page === 'About' ? 'text-white bg-primary-700 lg:bg-transparent lg:text-primary-700 dark:text-white' : 'text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700'}`}>About</a>
                         </li>
                        
                     </ul>
