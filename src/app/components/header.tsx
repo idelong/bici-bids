@@ -6,12 +6,22 @@ interface HeaderProps {
 }
 
 const Header:React.FC<HeaderProps> = ({page}) => {
-  const [token, setToken] = useState<string | null>(null);
+  const [loggedIn, setLoggedIn] = useState<string | null>(null);
   const [profileDropdown, setProfileDropdown] = useState<boolean>(false);
 
+
   useEffect(() => {
-    const storedToken = localStorage.getItem('token');
-    setToken(storedToken);
+    const checkAuth = async () => {
+      try {
+        const response = await fetch('/api/check-auth');
+        const data = await response.json();
+        setLoggedIn(data.loggedIn);
+      } catch (error) {
+        console.error('Error checking authentication', error);
+      }
+    };
+
+    checkAuth();
   }, []);
 
   const flipDropdown = () => {
@@ -43,7 +53,7 @@ const Header:React.FC<HeaderProps> = ({page}) => {
                       </div>
                   </form>
 
-                    {token ? (
+                    {loggedIn ? (
                       <div className="flex relative"> 
                         <a className="ml-4">
                           <Image src="/profileicon.png" className="rounded-full h-16 w-16" width={50} height={50} alt="Profile Image" onClick={flipDropdown} style={{ cursor: 'pointer' }}/>

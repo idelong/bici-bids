@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
 export default function Signup() {
   const [email, setEmail] = useState('');
@@ -15,21 +16,17 @@ export default function Signup() {
       return;
     }
 
-    const response = await fetch('http://localhost:3001/api/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const response = await axios.post('http://localhost:3001/api/users', {
+        email,
+        password,
+      });
 
-    const data = await response.json();
-    if (response.ok) {
-      localStorage.setItem('token', data.token);
+      
       // Redirect to a protected route or home page
       router.push('/');
-    } else {
-      alert(data.message);
+    } catch (error) {
+      alert(error);
     }
   };
 
@@ -88,7 +85,7 @@ export default function Signup() {
                 </div>
                 <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Create an account</button>
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                  Already have an account? <a href="#" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</a>
+                  Already have an account? <a href="/signin" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</a>
                 </p>
               </form>
             </div>
