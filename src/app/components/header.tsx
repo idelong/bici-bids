@@ -1,13 +1,14 @@
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface HeaderProps {
   page: String;
 }
 
 const Header:React.FC<HeaderProps> = ({page}) => {
-  const [loggedIn, setLoggedIn] = useState<string | null>(null);
+  const [loggedIn, setLoggedIn] = useState<boolean>(true);
   const [profileDropdown, setProfileDropdown] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
 
   useEffect(() => {
@@ -27,6 +28,24 @@ const Header:React.FC<HeaderProps> = ({page}) => {
   const flipDropdown = () => {
     setProfileDropdown(prevState => !prevState);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setProfileDropdown(false);
+      }
+    };
+
+    if (profileDropdown) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [profileDropdown]);
 
 
 
@@ -59,14 +78,14 @@ const Header:React.FC<HeaderProps> = ({page}) => {
                           <Image src="/profileicon.png" className="rounded-full h-16 w-16" width={50} height={50} alt="Profile Image" onClick={flipDropdown} style={{ cursor: 'pointer' }}/>
                         </a>
                         {profileDropdown ? (
-                        <div className="absolute right--10 z-10 mt-14  origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex={-1}>
+                        <div className="absolute right--10 z-10 mt-14 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5" ref={dropdownRef} role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex={-1}>
                           <div className="py-2 w-32 text-sm text-gray-700 dark:text-gray-200" role="none">
                             
                             <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem" tabIndex={-1} id="menu-item-0">Account</a>
                             <a href="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem" tabIndex={-1} id="menu-item-1">Settings</a>
                             
-                            <form method="POST" action="#" role="none">
-                              <button type="submit" className="w-full block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem" tabIndex={-1} id="menu-item-3">Sign out</button>
+                            <form method="POST" action="#" role="menuitem">
+                              <button type="submit" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem" tabIndex={-1} id="menu-item-3">Sign out</button>
                             </form>
                           </div>
                         </div>

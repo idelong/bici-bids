@@ -11,10 +11,10 @@ app.use(json());
 app.use(cors());
 
 const pool = new Pool({
-  user: 'yourdbuser',
+  user: 'idelong',
   host: 'localhost',
-  database: 'yourdbname',
-  password: 'yourdbpassword',
+  database: 'bicibids',
+  password: 'contrasena',
   port: 5432,
 });
 
@@ -102,6 +102,31 @@ const authenticateToken = (req, res, next) => {
     next();
   });
 };
+
+app.post('/api/sell/listings', authenticateToken, (req, res)) => {
+  const {brand,
+    model,
+    year,
+    condition,
+    location,
+    currentBid,
+    timeLeft,
+    imageUrl} = req.body;
+    // need to generate itemId here
+    
+    console.log({
+      brand,
+      model,
+      year,
+      condition,
+      location,
+      currentBid,
+      timeLeft,
+      imageUrl
+    });
+
+
+});
 
 app.get('/api/protected', authenticateToken, (req, res) => {
   res.json({ message: 'This is a protected route' });

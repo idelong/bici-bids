@@ -8,44 +8,48 @@ export default function Buy() {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           <ItemTile
-            title="Mountain Bike"
-            lister="John Doe"
-            location="New York"
-            buyNowPrice={500}
+            id="1"
+            model="Gan Disc"
+            brand="Pinarello"
+            year={2022}
+            location="New York, NY"
             currentBid={300}
             timeLeft={48}
             watcherCount={15}
-            imageUrl="/path/to/image1.jpg"
+            imageUrl="/2022-pinarello-gan.jpg"
           />
           <ItemTile
-            title="Road Bike"
-            lister="Jane Smith"
-            location="Seattle"
-            buyNowPrice={750}
+            id="2"
+            model="Ultimate"
+            brand="Canyon"
+            year={2024}
+            location="Seattle, WA"
             currentBid={450}
             timeLeft={24}
             watcherCount={10}
-            imageUrl="/path/to/image2.jpg"
+            imageUrl="/2024-Canyon-Endurace-CF-SLX-8-eTap-1.jpg"
           />
           <ItemTile
-            title="Electric Bike"
-            lister="Bob Johnson"
-            location="San Francisco"
-            buyNowPrice={1200}
+            id="3"
+            model="Endurace SLX SL"
+            brand="Canyon"
+            year={2023}
+            location="San Francisco, CA"
             currentBid={950}
             timeLeft={72}
             watcherCount={25}
-            imageUrl="/path/to/image3.jpg"
+            imageUrl="/BiciLogo700.svg"
           />
           <ItemTile
-            title="Hybrid Bike"
-            lister="Alice Brown"
-            location="New York"
-            buyNowPrice={650}
+            id="4"
+            model="Dogma"
+            brand="Pinarello"
+            year={2022}
+            location="Austin, TX"
             currentBid={500}
             timeLeft={36}
             watcherCount={20}
-            imageUrl="/path/to/image4.jpg"
+            imageUrl="/BiciLogo700.svg"
           />
         </div>
       </div>

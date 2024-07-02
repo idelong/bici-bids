@@ -2,26 +2,29 @@ import { useState } from 'react';
 import Header from '@/app/components/header';
 
 export default function Sell() {
-  const [title, setTitle] = useState('');
-  const [lister, setLister] = useState('');
+  const [brand, setBrand] = useState('');
+  const [model, setModel] = useState('');
+  const [year, setYear] = useState('');
+  const [condition, setCondition] = useState('');
+  
   const [location, setLocation] = useState('');
-  const [buyNowPrice, setBuyNowPrice] = useState('');
+  
   const [currentBid, setCurrentBid] = useState('');
   const [timeLeft, setTimeLeft] = useState('');
-  const [watcherCount, setWatcherCount] = useState('');
+  
   const [imageUrl, setImageUrl] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission logic here
     console.log({
-      title,
-      lister,
+      brand,
+      model,
+      year,
+      condition,
       location,
-      buyNowPrice,
       currentBid,
       timeLeft,
-      watcherCount,
       imageUrl
     });
   };
@@ -30,38 +33,74 @@ export default function Sell() {
     <div>
       <Header page="Sell"/>
       <div className="container mx-auto px-4 py-8">
-        <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md">
+        <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-lg">
           <h2 className="text-2xl font-bold mb-6">Create a Listing</h2>
           
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
-              Title
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="brand">
+              Brand
             </label>
             <input
-              id="title"
+              id="brand"
               type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
+              value={brand}
+              onChange={(e) => setBrand(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Enter the title"
+              placeholder="Enter brand"
               required
             />
           </div>
-          
+
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lister">
-              Lister
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="model">
+              Model
             </label>
             <input
-              id="lister"
+              id="model"
               type="text"
-              value={lister}
-              onChange={(e) => setLister(e.target.value)}
+              value={model}
+              onChange={(e) => setModel(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Enter your name"
+              placeholder="Enter model"
               required
             />
           </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="year">
+              Year
+            </label>
+            <input
+              id="year"
+              type="text"
+              value={year}
+              onChange={(e) => setYear(e.target.value)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              placeholder="Enter year"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="condition">
+              Condition
+            </label>
+            <select
+              id="condition"
+              value={condition}
+              onChange={(e) => setCondition(e.target.value)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              required
+            >
+              <option value="" disabled>Select condition</option>
+              <option value="new">New</option>
+              <option value="like new">Like New</option>
+              <option value="good">Good</option>
+              <option value="fair">Fair</option>
+              <option value="poor">Poor</option>
+            </select>
+          </div>
+        
           
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="location">
@@ -73,25 +112,11 @@ export default function Sell() {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Enter the location or ZIP code"
+              placeholder="Enter ZIP code"
               required
             />
           </div>
           
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="buyNowPrice">
-              Buy Now Price
-            </label>
-            <input
-              id="buyNowPrice"
-              type="number"
-              value={buyNowPrice}
-              onChange={(e) => setBuyNowPrice(e.target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Enter the buy now price"
-              required
-            />
-          </div>
           
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="currentBid">
@@ -103,7 +128,7 @@ export default function Sell() {
               value={currentBid}
               onChange={(e) => setCurrentBid(e.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Enter the current bid"
+              placeholder="Enter the starting bid"
               required
             />
           </div>
